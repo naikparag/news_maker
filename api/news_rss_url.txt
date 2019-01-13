@@ -1,2 +1,3 @@
 source,url
 TOI,https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms
+The Hindu,https://www.thehindu.com/news/national/feeder/default.rss

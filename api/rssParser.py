@@ -4,6 +4,8 @@ from newspaper import Article
 
 import api.logger as apiLogger
 logger = apiLogger.getLogger(__name__)
+import api.repo as repo
+
 
 INPUT_RSS_CSV = 'api/news_rss_url.txt'
 
@@ -21,8 +23,13 @@ def processRSSUrl(url, source):
     logger.info('processing {count} entries for feed: {url}'.format(count=str(len(newsFeed.entries)), url=url))
     for entry in newsFeed.entries:
         post = Post(entry.title, entry.link, entry.published, source)
-        post = processNews(post)
-        output.append(post)
+        existingPost = repo.findOne(post, 'link', post.link)
+        if existingPost is None:
+            post = processNews(post)
+            output.append(post)
+            repo.save(post)
+        else:
+            logger.info('post for url already exists: {url}'.format(url=post.link))
 
 def processNews(post):
     article = Article(post.link)
