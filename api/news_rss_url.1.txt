@@ -1,0 +1,7 @@
+url
+https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms
+https://www.indiatoday.in/rss/1206584
+https://www.indiatvnews.com/rssnews/topstory-india.xml
+http://feeds.reuters.com/reuters/INtopNews
+https://www.thehindu.com/news/national/feeder/default.rss
+https://www.oneindia.com/rss/news-india-fb.xml
