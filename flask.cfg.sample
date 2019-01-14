@@ -1,3 +1,5 @@
+# copy this file as 'flask.cfg' when deployed to a new env and update values as needed.
+
 DEBUG = True
 ENV = 'development'
 PORT = 8888
