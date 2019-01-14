@@ -1,0 +1,4 @@
+DEBUG = True
+ENV = 'development'
+PORT = 8888
+ADMIN_KEY = 'SuperSecret'

@@ -3,3 +3,4 @@
 .flaskenv
 *.pyc
 *.log
+*.cfg

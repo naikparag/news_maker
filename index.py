@@ -7,6 +7,7 @@ logger = apiLogger.getLogger(__name__)
 
 from flask import Flask
 app = Flask(__name__)
+app.config.from_pyfile('flask.cfg')
 
 @app.route("/")
 def index():
@@ -21,4 +22,4 @@ def rss():
     return jsonpickle.encode(result, unpicklable=False)
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=9300, debug=True)
+    app.run(host='localhost', port=app.config['PORT'], debug=app.config['DEBUG'])
