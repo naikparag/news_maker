@@ -20,7 +20,6 @@ def findOne(object, key, value):
         print(ex)
     return None
 
-
 def getCollectionName(object):
     return str(type(object).__name__)
 

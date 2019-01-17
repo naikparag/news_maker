@@ -9,14 +9,13 @@ from flask import Flask
 app = Flask(__name__)
 app.config.from_pyfile('flask.cfg')
 
-# ---- Decorator ----
+# Decorators
+# --------------------
 from functools import wraps
 from flask import request, abort
 def validate_apikey(func):
     @wraps(func)
     def decoratedFunc(*args, **kwargs):
-        print(request.headers.get('api-key'))
-        print(request.args.get('api-key'))
         if (app.config['ADMIN_KEY'] == request.headers.get('api-key') 
         or app.config['ADMIN_KEY'] == request.args.get('api-key')):
             return(func(*args, **kwargs))
@@ -24,7 +23,8 @@ def validate_apikey(func):
             abort(401)
     return decoratedFunc
 
-# ---- Routes ----
+# Routes
+# --------------------
 @app.route("/")
 @validate_apikey
 def index():
@@ -38,6 +38,9 @@ def rss():
         "result" : parsedData
     }
     return jsonpickle.encode(result, unpicklable=False)
+
+# Main
+# --------------------
 
 if __name__ == '__main__':
     app.run(host='localhost', port=app.config['PORT'], debug=app.config['DEBUG'])

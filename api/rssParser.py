@@ -6,8 +6,8 @@ import api.logger as apiLogger
 logger = apiLogger.getLogger(__name__)
 import api.repo as repo
 
-
 INPUT_RSS_CSV = 'api/news_rss_url.txt'
+
 
 def processRSSCsv():
     global output
