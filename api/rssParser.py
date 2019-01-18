@@ -9,10 +9,11 @@ import api.repo as repo
 INPUT_RSS_CSV = 'api/news_rss_url.txt'
 
 
-def processRSSCsv():
+def processRSSCsv(inputFile):
+    logger.info('processinng input file: {file}'.format(file=inputFile))
     global output
     output = []
-    with open(INPUT_RSS_CSV, mode='r') as csv_file:
+    with open(inputFile, mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             processRSSUrl(row['url'], row['source'])

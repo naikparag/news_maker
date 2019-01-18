@@ -4,3 +4,5 @@ DEBUG = True
 ENV = 'development'
 PORT = 8888
 ADMIN_KEY = 'SuperSecret'
+MONGO_URL = 'username@password@localhost:27017'
+INPUT_RSS_FILE_PATH = 'api/news_rss_url.local.txt'
