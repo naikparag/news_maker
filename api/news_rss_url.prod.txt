@@ -1,7 +1,7 @@
-url
-https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms
-https://www.indiatoday.in/rss/1206584
-https://www.indiatvnews.com/rssnews/topstory-india.xml
-http://feeds.reuters.com/reuters/INtopNews
-https://www.thehindu.com/news/national/feeder/default.rss
-https://www.oneindia.com/rss/news-india-fb.xml
+source,url
+TOI,https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms
+IndiaToday,https://www.indiatoday.in/rss/1206584
+IndiaTVNews,https://www.indiatvnews.com/rssnews/topstory-india.xml
+Reuters,http://feeds.reuters.com/reuters/INtopNews
+TheHinduhttps://www.thehindu.com/news/national/feeder/default.rss
+OneIndia,https://www.oneindia.com/rss/news-india-fb.xml

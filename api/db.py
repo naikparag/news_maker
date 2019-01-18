@@ -6,7 +6,6 @@ def initDb(app):
     if db is None:
         try:
             mongoUrl = app.config['MONGO_URL']
-            print('printing mongourl' + mongoUrl)
             client = MongoClient(mongoUrl)
             db = client['news_maker']
             print('Initializing Database.....')
