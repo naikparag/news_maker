@@ -12,7 +12,7 @@ def initDb(app):
 
             db.Post.create_index('link', unique=True)
         except Exception as ex:
-            print('db - exception' + str(ex))
+            print('db - exception: ' + str(ex))
     return db
 
 def getDb():

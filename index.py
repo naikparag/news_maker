@@ -1,4 +1,4 @@
-import jsonpickle
+from bson.json_util import dumps, RELAXED_JSON_OPTIONS
 import logging
 
 import api.rssParser as rssParser
@@ -16,6 +16,8 @@ def create_app():
 
 app = create_app()
 
+import api.repo as repo
+
 # Decorators
 # --------------------
 from functools import wraps
@@ -30,13 +32,19 @@ def validate_apikey(func):
             abort(401)
     return decoratedFunc
 
-
 # Routes
 # --------------------
 @app.route("/")
 @validate_apikey
 def index():
     return "Helllo NEWS-MAKER!"
+
+@app.route("/post")
+@validate_apikey
+def getPost():
+    limit = request.args.get('limit') or 0
+    result = repo.find("Post", { 'title': 1, 'link': 1, 'text': 1 }, int(limit))
+    return dumps(result, json_options=RELAXED_JSON_OPTIONS)
 
 @app.route("/rss")
 @validate_apikey
@@ -46,7 +54,7 @@ def rss():
     result = {
         "result" : parsedData
     }
-    return jsonpickle.encode(result, unpicklable=False)
+    return dumps(result)
 
 # Main
 # --------------------
