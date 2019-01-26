@@ -21,7 +21,10 @@ def processRSSUrl(url, source):
     logger.info('processing {count} entries for feed: {url}'.format(count=str(len(newsFeed.entries)), url=url))
     skipCount = 0
     for entry in newsFeed.entries:
-        post = Post(entry.title, entry.link, entry.published, source)
+        published = ''
+        if hasattr(entry, 'published'):
+            published = entry.published
+        post = Post(entry.title, entry.link, published, source)
         existingPost = repo.findOne(post, 'link', post.link)
         if existingPost is None:
             try:

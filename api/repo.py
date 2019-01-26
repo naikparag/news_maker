@@ -1,6 +1,7 @@
 import jsonpickle
 import json
 import datetime
+import pymongo
 import api.db as db
 
 def save(object):
@@ -25,7 +26,7 @@ def findOne(object, key, value):
 def find(collection, select='', limit=20, filter={}):
     dbConn = db.getDb()
     try:
-        return dbConn[collection].find(filter, select).limit(limit)
+        return dbConn[collection].find(filter, select).limit(limit).sort('last_modified', pymongo.DESCENDING)
     except Exception as ex:
         print('repo - exception: ' + str(ex))
     return None

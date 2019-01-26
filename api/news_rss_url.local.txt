@@ -1,2 +1,2 @@
 source,url
-TOI,https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms
+Rediff,http://ia.rediff.com/rss/newsrss.xml
