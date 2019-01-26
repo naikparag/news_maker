@@ -14,7 +14,7 @@ def processRSSCsv(inputFile):
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             processRSSUrl(row['url'], row['source'])
-    return 'processing '
+    return 'processing complete.'
 
 def processRSSUrl(url, source):
     newsFeed = feedparser.parse(url)

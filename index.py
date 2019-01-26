@@ -1,5 +1,6 @@
 from bson.json_util import dumps, RELAXED_JSON_OPTIONS
 import logging
+from apscheduler.schedulers.background import BackgroundScheduler
 
 import api.rssParser as rssParser
 import api.db as db
@@ -8,10 +9,24 @@ logger = apiLogger.getLogger(__name__)
 
 from flask import Flask
 
+# Scheduler
+# --------------------
+def rssScheduler(file):
+    rssParser.processRSSCsv(file)
+
+def initScheduler(file):
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(rssScheduler, 'interval', minutes=30, id='scheduler_bg_rss_parser', args=[file])
+    scheduler.start()
+
+# app
+# --------------------
+
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('flask.cfg')
     db.initDb(app)
+    initScheduler(app.config['INPUT_RSS_FILE_PATH'])
     return app
 
 app = create_app()
