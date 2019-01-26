@@ -30,5 +30,15 @@ def find(collection, select='', limit=20, filter={}):
         print('repo - exception: ' + str(ex))
     return None
 
+def getStats():
+    dbConn = db.getDb()
+    try:
+        return dbConn['Post'].aggregate([
+            {'$group' : {'_id':'$source', 'count':{'$sum':1}}}
+        ])
+    except Exception as ex:
+        print('repo - exception: ' + str(ex))
+    return None
+
 def getCollectionName(object):
     return str(type(object).__name__)

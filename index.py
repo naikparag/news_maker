@@ -56,6 +56,12 @@ def rss():
     }
     return dumps(result)
 
+@app.route('/stats')
+@validate_apikey
+def getStats():
+    result = repo.getStats()
+    return dumps(result)
+
 # Main
 # --------------------
 
