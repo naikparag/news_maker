@@ -14,7 +14,7 @@ def processRSSCsv(inputFile):
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             processRSSUrl(row['url'], row['source'])
-    return output
+    return 'processing '
 
 def processRSSUrl(url, source):
     newsFeed = feedparser.parse(url)
@@ -36,11 +36,15 @@ def processRSSUrl(url, source):
     logger.info('skipping {count} entries for feed: {rssUrl}'.format(count=skipCount, rssUrl=url))
 
 def processNews(post):
-    article = Article(post.link)
-    article.download()
-    article.parse()
-    post.setPostDetails(article.text, article.authors, article.top_image)
-    return post
+    try:
+        article = Article(post.link)
+        article.download()
+        article.parse()
+        post.setPostDetails(article.text, article.authors, article.top_image)
+        return post
+    except Exception:
+        raise
+    return None
 
 class Post(object):
     def __init__(self, title, link, published, source):
