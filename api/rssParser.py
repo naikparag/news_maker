@@ -24,9 +24,13 @@ def processRSSUrl(url, source):
         post = Post(entry.title, entry.link, entry.published, source)
         existingPost = repo.findOne(post, 'link', post.link)
         if existingPost is None:
-            post = processNews(post)
-            output.append(post)
-            repo.save(post)
+            try:
+                post = processNews(post)
+                output.append(post)
+                repo.save(post)
+            except Exception as ex:
+                print('ex handling for {url}: {error}'.format(url=post.link) + str(ex))
+                skipCount += 1
         else:
             skipCount += 1
     logger.info('skipping {count} entries for feed: {rssUrl}'.format(count=skipCount, rssUrl=url))
