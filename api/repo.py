@@ -34,9 +34,19 @@ def find(collection, select='', limit=20, filter={}):
 def getStats():
     dbConn = db.getDb()
     try:
-        return dbConn['Post'].aggregate([
+        cursor = dbConn['Post'].aggregate([
             {'$group' : {'_id':'$source', 'count':{'$sum':1}}}
         ])
+
+        results = list(cursor)
+        total = 0
+        for row in results:
+            print(row)
+            total += row['count']
+
+        results.append({'total': total})
+        return results
+
     except Exception as ex:
         print('repo - exception: ' + str(ex))
     return None
