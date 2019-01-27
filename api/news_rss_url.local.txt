@@ -1,2 +1,2 @@
 source,url
-Rediff,http://ia.rediff.com/rss/newsrss.xml
+TheHinduBusinessLine,https://www.thehindubusinessline.com/news/feeder/default.rss

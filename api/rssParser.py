@@ -32,7 +32,8 @@ def processRSSUrl(url, source):
                 output.append(post)
                 repo.save(post)
             except Exception as ex:
-                print('ex handling for {url}: {error}'.format(url=post.link, error=str(ex)))
+                logger.error('ex handling for {url}: {error}'.format(url=post.link, error=str(ex)))
+                repo.save(post)
                 skipCount += 1
         else:
             skipCount += 1

@@ -52,7 +52,7 @@ def validate_apikey(func):
 @app.route("/")
 @validate_apikey
 def index():
-    return "Helllo NEWS-MAKER!"
+    return "NEWS-MAKER v1.0.1"
 
 @app.route("/post")
 @validate_apikey
