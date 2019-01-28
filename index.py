@@ -57,7 +57,7 @@ def index():
 @app.route("/post")
 @validate_apikey
 def getPost():
-    limit = request.args.get('limit') or 0
+    limit = request.args.get('limit') or 20
     result = repo.find("Post", { 'title': 1, 'link': 1, 'text': 1 }, int(limit))
     return dumps(result, json_options=RELAXED_JSON_OPTIONS)
 
