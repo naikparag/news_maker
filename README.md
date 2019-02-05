@@ -33,3 +33,11 @@ db.createUser(
 
 mongo admin -u "<username_here>" -p "<password_here>"
 ```
+
+# endpoints
+```
+- /demo
+- /post?api-key=<api-key-from-config>&limit=2&page=1
+- /stats?api-key=<api-key-from-config>
+- /rss?api-key=<api-key-from-config>
+```
