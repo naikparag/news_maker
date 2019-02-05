@@ -7,9 +7,9 @@ import api.db as db
 import api.logger as apiLogger
 logger = apiLogger.getLogger(__name__)
 
-from flask import Flask
+from flask import Flask, url_for
 
-VERSION = '1.0.2'
+VERSION = 'v1.0.2'
 
 # Scheduler
 # --------------------
@@ -83,7 +83,19 @@ def getStats():
 from flask import render_template
 @app.route('/demo')
 def demo():
-    bundle = { 'title': 'News-Maker Demo', 'version': VERSION }
+    limit = request.args.get('limit') or 1
+    page = request.args.get('page') or 1
+    result = repo.find("Post", { 'title': 1, 'text': 1 }, int(limit), int(page))
+    postDict = dict(result[0])
+    previousPost = url_for('demo', limit=limit, page=int(page)-1)
+    nextPost = url_for('demo', limit=limit, page=int(page)+1)
+    bundle = { 
+        'title': 'News-Maker Demo',
+        'version': VERSION,
+        'post': postDict['title'],
+        'previousPost': previousPost,
+        'nextPost': nextPost
+    }
     return render_template('index.html', bundle=bundle)
 
 # Main
