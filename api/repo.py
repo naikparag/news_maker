@@ -23,10 +23,13 @@ def findOne(object, key, value):
         print('repo - exception: ' + str(ex))
     return None
 
-def find(collection, select='', limit=20, filter={}):
+def find(collection, select, limit, page, filter={}):
+
+    skip = limit*(page-1)
+    skip = 0 if skip < 0 else skip
     dbConn = db.getDb()
     try:
-        return dbConn[collection].find(filter, select).limit(limit).sort('last_modified', pymongo.DESCENDING)
+        return dbConn[collection].find(filter, select).skip(skip).limit(limit).sort('last_modified', pymongo.DESCENDING)
     except Exception as ex:
         print('repo - exception: ' + str(ex))
     return None

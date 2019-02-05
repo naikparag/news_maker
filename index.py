@@ -9,6 +9,8 @@ logger = apiLogger.getLogger(__name__)
 
 from flask import Flask
 
+VERSION = '1.0.2'
+
 # Scheduler
 # --------------------
 def rssScheduler(file):
@@ -23,7 +25,7 @@ def initScheduler(file):
 # --------------------
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='web', static_folder='web/static')
     app.config.from_pyfile('flask.cfg')
     db.initDb(app)
     initScheduler(app.config['INPUT_RSS_FILE_PATH'])
@@ -52,13 +54,14 @@ def validate_apikey(func):
 @app.route("/")
 @validate_apikey
 def index():
-    return "NEWS-MAKER v1.0.1"
+    return "NEWS-MAKER " + VERSION
 
 @app.route("/post")
 @validate_apikey
 def getPost():
     limit = request.args.get('limit') or 20
-    result = repo.find("Post", { 'title': 1, 'link': 1, 'text': 1 }, int(limit))
+    page = request.args.get('page') or 0
+    result = repo.find("Post", { 'title': 1, 'link': 1, 'text': 1 }, int(limit), int(page))
     return dumps(result, json_options=RELAXED_JSON_OPTIONS)
 
 @app.route("/rss")
@@ -76,6 +79,12 @@ def rss():
 def getStats():
     result = repo.getStats()
     return dumps(result)
+
+from flask import render_template
+@app.route('/demo')
+def demo():
+    bundle = { 'title': 'News-Maker Demo', 'version': VERSION }
+    return render_template('index.html', bundle=bundle)
 
 # Main
 # --------------------
