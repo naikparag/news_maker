@@ -3,6 +3,7 @@ import logging
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import api.rssParser as rssParser
+import api.controller.post as postController
 import api.db as db
 import api.logger as apiLogger
 logger = apiLogger.getLogger(__name__)
@@ -61,7 +62,7 @@ def index():
 def getPost():
     limit = request.args.get('limit') or 20
     page = request.args.get('page') or 0
-    result = repo.find("Post", { 'title': 1, 'link': 1, 'text': 1 }, int(limit), int(page))
+    result = postController.getPosts(limit, page)
     return dumps(result, json_options=RELAXED_JSON_OPTIONS)
 
 @app.route("/rss")
@@ -83,16 +84,14 @@ def getStats():
 from flask import render_template
 @app.route('/demo')
 def demo():
-    limit = request.args.get('limit') or 1
-    page = request.args.get('page') or 1
-    result = repo.find("Post", { 'title': 1, 'text': 1 }, int(limit), int(page))
-    postDict = dict(result[0])
-    previousPost = url_for('demo', limit=limit, page=int(page)-1)
-    nextPost = url_for('demo', limit=limit, page=int(page)+1)
+    limit = int(request.args.get('limit') or 1)
+    page = int(request.args.get('page') or 1)
+
+    post, previousPost, nextPost = postController.getPostForDemo(limit, page)
     bundle = { 
         'title': 'News-Maker Demo',
         'version': VERSION,
-        'post': postDict['title'],
+        'post': post['demoText'],
         'previousPost': previousPost,
         'nextPost': nextPost
     }
