@@ -12,7 +12,9 @@ def getPostForDemo(limit, page):
 
     result = getPosts(limit, page)
     postDict = dict(result[0])
-    postDict['demoText'] = postDict.get('title', '') + '\n' + postDict.get('text', '')
+    postDict['title'] = postDict.get('title', '')
+    postDict['text'] = postDict.get('text', '')
+    # postDict['demoText'] = postDict.get('title', '') + '\n' + postDict.get('text', '')
     if page > 1:
         previousPost = url_for('demo', limit=limit, page=page-1)
     else :

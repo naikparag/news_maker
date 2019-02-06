@@ -35,9 +35,30 @@
             <div>
                 <article class="message is-dark is-small">
                     <div class="message-body">
-                        {{bundle.post}}
+                        {{bundle.postTitle}}
+                        {% if bundle.postBody|length > 1 %}
+                        <br>
+                        <br>
+                            {{bundle.postBody}}
+                        {%- endif %}
                     </div>
                 </article>
+            </div>
+            <br>
+            <div>
+                <article class="message is-dark is-small">
+                    <div class="message-body">
+                        {{bundle.postTitleNLP|safe}}
+                        {% if bundle.postBody|length > 1 %}
+                        <br>
+                        <br>
+                            {{bundle.postBodyNLP|safe}}
+                        {%- endif %}
+                    </div>
+                </article>
+            </div>
+            <div>
+                
             </div>
         </div>
     </section>

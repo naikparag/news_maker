@@ -82,16 +82,22 @@ def getStats():
     return dumps(result)
 
 from flask import render_template
+import api.controller.nlp as nlp
 @app.route('/demo')
 def demo():
     limit = int(request.args.get('limit') or 1)
     page = int(request.args.get('page') or 1)
 
     post, previousPost, nextPost = postController.getPostForDemo(limit, page)
+    titleEntityHTML, textEntityHTML = nlp.nlp(post['title'], post['text'])
+
     bundle = { 
         'title': 'News-Maker Demo',
         'version': VERSION,
-        'post': post['demoText'],
+        'postTitle': post['title'],
+        'postBody': post['text'],
+        'postTitleNLP': titleEntityHTML,
+        'postBodyNLP': textEntityHTML,
         'previousPost': previousPost,
         'nextPost': nextPost
     }

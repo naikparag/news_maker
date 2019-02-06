@@ -15,6 +15,7 @@ Parsing News articles for NLP
 - Setup Mongo DB with username / password
 - Clone Repo
 - `cd` into the repo directory & run `pip3 install -r requirements.txt`
+- python3 -m spacy download en_core_web_sm // load language for NLP
 - Copy flask.cfg.sample as flask.cfg > update necessary config values
 - Start using `python3 index.py`
 
