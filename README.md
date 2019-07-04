@@ -42,3 +42,4 @@ mongo admin -u "<username_here>" -p "<password_here>"
 - /stats?api-key=<api-key-from-config>
 - /rss?api-key=<api-key-from-config>
 ```
+
