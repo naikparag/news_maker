@@ -16,9 +16,9 @@ def getPostForDemo(limit, page):
     postDict['text'] = postDict.get('text', '')
     # postDict['demoText'] = postDict.get('title', '') + '\n' + postDict.get('text', '')
     if page > 1:
-        previousPost = url_for('newsmaker/demo', limit=limit, page=page-1)
+        previousPost = url_for('demo', limit=limit, page=page-1)
     else :
-        previousPost = url_for('newsmaker/demo', limit=limit, page=page)
-    nextPost = url_for('newsmaker/demo', limit=limit, page=page+1)
+        previousPost = url_for('demo', limit=limit, page=page)
+    nextPost = url_for('demo', limit=limit, page=page+1)
 
     return postDict, previousPost, nextPost

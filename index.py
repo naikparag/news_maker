@@ -98,8 +98,8 @@ def demo():
         'postBody': post['text'],
         'postTitleNLP': titleEntityHTML,
         'postBodyNLP': textEntityHTML,
-        'previousPost': previousPost,
-        'nextPost': nextPost
+        'previousPost': app.config['NGINX_SUBPATH'] + previousPost,
+        'nextPost': app.config['NGINX_SUBPATH'] + nextPost
     }
     return render_template('index.html', bundle=bundle)
 
