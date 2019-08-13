@@ -10,7 +10,7 @@ logger = apiLogger.getLogger(__name__)
 
 from flask import Flask, url_for
 
-VERSION = 'v1.0.3'
+VERSION = 'v1.0.4'
 
 # Scheduler
 # --------------------
@@ -98,8 +98,8 @@ def demo():
         'postBody': post['text'],
         'postTitleNLP': titleEntityHTML,
         'postBodyNLP': textEntityHTML,
-        'previousPost': app.config['NGINX_SUBPATH'] + previousPost,
-        'nextPost': app.config['NGINX_SUBPATH'] + nextPost
+        'previousPost': previousPost,
+        'nextPost': nextPost
     }
     return render_template('index.html', bundle=bundle)
 

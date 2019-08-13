@@ -18,6 +18,15 @@ Parsing News articles for NLP
 - python3 -m spacy download en_core_web_sm // load language for NLP
 - Copy flask.cfg.sample as flask.cfg > update necessary config values
 - Start using `python3 index.py`
+- Nginx location redirect
+```
+location /<redirect_location>/ {
+      proxy_pass http://127.0.0.1:8000/;
+      proxy_read_timeout 1000s;
+      proxy_set_header Connection "";
+      proxy_set_header Host <server_ip>/<redirect_location>;
+  }
+```
 
 # mongodb setup
 - Docker: docker run -v /var/data/mongodb:/data/db -p 27017:27017 --name mymongo -d mongo mongod --smallfiles
