@@ -10,7 +10,7 @@ logger = apiLogger.getLogger(__name__)
 
 from flask import Flask, url_for
 
-VERSION = 'v1.0.4'
+VERSION = 'v1.0.5'
 
 # Scheduler
 # --------------------
