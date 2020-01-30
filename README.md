@@ -17,7 +17,6 @@ Parsing News articles for NLP
 - `cd` into the repo directory & run `pip3 install -r requirements.txt`
 - python3 -m spacy download en_core_web_sm // load language for NLP
 - Copy flask.cfg.sample as flask.cfg > update necessary config values
-- Start using `python3 index.py`
 - Nginx location redirect
 ```
 location /<redirect_location>/ {
@@ -28,7 +27,11 @@ location /<redirect_location>/ {
   }
 ```
 
+# Run
+`python3 index.py`
+
 # mongodb setup
+- Docker setup is optional as long as you have working MongoDb instance just update the flask.cfg file to reflect.
 - Docker: docker run -v /var/data/mongodb:/data/db -p 27017:27017 --name mymongo -d mongo mongod --smallfiles
   - replace `/var/data/mongodb` with volume share for docker on your local machine or server
 ```
